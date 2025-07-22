@@ -36,6 +36,14 @@ function App() {
     const[ternaryheader, setternaryheader] = useState (true);
 
 
+
+
+
+                                        {/* ARRAY DESTRUCTION */}
+    
+    const[listnama, setlistnama] = useState([]);      /* artinya ini array yang masih kosong */
+    const[nama1, setnama1] = useState("")
+
           
   return (
     <div className="App">
@@ -88,7 +96,27 @@ function App() {
       }} 
       />                                 
       {ternaryheader ? <h3>Ternary True!</h3> : <h3>Ternary False!</h3>}              {/* bentuk ternary */}
+        <hr />
 
+
+                                        {/* ARRAY DESTRUCTION */}
+      
+      <h1>ARRAY DESTRUCTION</h1>
+      <input type="text" 
+      onChange = {(event) => 
+      {setnama1 (event.target.value)
+
+      }}/>
+      <br />
+      <button onClick = {() => {
+        setlistnama([...listnama, nama1]);
+        setnama ("");
+      }}> Add Name </button>
+
+      {listnama.map((value, key) => {
+        return <h1 key={key}> {value} </h1>
+      })}
+                       
     </div>
   );
 }
