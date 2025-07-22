@@ -7,14 +7,18 @@ function App() {
 
   var judul = "First bgt";
 
-                          /* Introduction useState*/
+
+
+                                    { /* Introduction useState*/ }
   const [nama, setnama] = useState("fai");    /* set = variable setelah diubah ((syntax untuk menyimpan variable yang bisa diubah)) */
        {/* | */}                 {/* | */}                   
        {/* v */}                 {/* v */} 
     {/* variable awal 
     sebelum diubah */}        {/* isi awal variable */}   
 
-                              /* Login fOrm */
+
+
+                                        {/* Login fOrm */}
    const usernameasli = "takuttokek";
    const passwordasli ="dara090906";
    const[username, setusername] = useState("");
@@ -28,6 +32,18 @@ function App() {
    }
 
 
+                                          {/* Ternary */}
+    const[ternaryheader, setternaryheader] = useState (true);
+
+
+
+
+
+                                        {/* ARRAY DESTRUCTION */}
+    
+    const[listnama, setlistnama] = useState([]);      /* artinya ini array yang masih kosong */
+    const[nama1, setnama1] = useState("")
+
           
   return (
     <div className="App">
@@ -35,6 +51,8 @@ function App() {
       <Funct />                            {/*   ini untuk manggil function yang udah diimport  */}
       <Useparameter nama="dara"/>          {/*   ini untuk manggil function yang ada parameter/props */}
       <hr />
+
+                                     {/* Introduction useState*/}
 
       <h1> UseState Introduction </h1>
       {nama}
@@ -67,12 +85,38 @@ function App() {
       onClick = {validasidata} 
       />
 
-      {loggedin && <h1> Login Succesfully! </h1>}
+      {loggedin && <h1> Login Successfully! </h1>}
 
       <hr />
+                                        {/* Ternary */}
+
+      <h1> Ternary </h1>
+      <input type="submit" onClick = {() => {
+        setternaryheader(false);
+      }} 
+      />                                 
+      {ternaryheader ? <h3>Ternary True!</h3> : <h3>Ternary False!</h3>}              {/* bentuk ternary */}
+        <hr />
 
 
+                                        {/* ARRAY DESTRUCTION */}
+      
+      <h1>ARRAY DESTRUCTION</h1>
+      <input type="text" 
+      onChange = {(event) => 
+      {setnama1 (event.target.value)
 
+      }}/>
+      <br />
+      <button onClick = {() => {
+        setlistnama([...listnama, nama1]);
+        setnama ("");
+      }}> Add Name </button>
+
+      {listnama.map((value, key) => {
+        return <h1 key={key}> {value} </h1>
+      })}
+                       
     </div>
   );
 }
