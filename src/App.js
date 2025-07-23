@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Funct from "./FolderFunction/func.js"; 
 import Useparameter from "./FolderFunction/func1.js"
 /* import function dari folder yang isinya function (reusable) */
@@ -7,14 +7,18 @@ function App() {
 
   var judul = "First bgt";
 
-                          /* Introduction useState*/
+
+
+                                    { /* Introduction useState*/ }
   const [nama, setnama] = useState("fai");    /* set = variable setelah diubah ((syntax untuk menyimpan variable yang bisa diubah)) */
        {/* | */}                 {/* | */}                   
        {/* v */}                 {/* v */} 
     {/* variable awal 
     sebelum diubah */}        {/* isi awal variable */}   
 
-                              /* Login fOrm */
+
+
+                                        {/* Login fOrm */}
    const usernameasli = "takuttokek";
    const passwordasli ="dara090906";
    const[username, setusername] = useState("");
@@ -28,6 +32,39 @@ function App() {
    }
 
 
+                                          {/* Ternary */}
+    const[ternaryheader, setternaryheader] = useState (true);
+
+
+
+
+
+                                        {/* ARRAY DESTRUCTION */}
+    
+    const[listnama, setlistnama] = useState([]);      /* artinya ini array yang masih kosong */
+    const[nama1, setnama1] = useState("")
+
+
+
+
+                                            {/* USE EFFECT */}
+      const[count,setcount] = useState(0);
+
+      useEffect (() => {                        /* dia bakal selalu ngelakuin kode di dalamnya kalo countnya berubah*/
+        console.log("page rendered");
+      }, [count]);
+    
+
+                                            {/* USE REF*/}
+      const input = useRef(null);
+
+      const changeplaceholder = () => {
+        console.log(input);         /*consolelog detail dari input*/
+        input.current.placeholder = "keganti";     /*change placeholder, bisa value juga alias isinya*/
+        input.current.focus();   /*pencet button otomatis ngeclick input*/
+      }
+
+    
           
   return (
     <div className="App">
@@ -35,6 +72,8 @@ function App() {
       <Funct />                            {/*   ini untuk manggil function yang udah diimport  */}
       <Useparameter nama="dara"/>          {/*   ini untuk manggil function yang ada parameter/props */}
       <hr />
+
+                                     {/* Introduction useState*/}
 
       <h1> UseState Introduction </h1>
       {nama}
@@ -67,9 +106,64 @@ function App() {
       onClick = {validasidata} 
       />
 
-      {loggedin && <h1> Login Succesfully! </h1>}
+      {loggedin && <h1> Login Successfully! </h1>}
 
       <hr />
+                                        {/* Ternary */}
+
+      <h1> Ternary </h1>
+      <input type="submit" onClick = {() => {
+        setternaryheader(false);
+      }} 
+      />                                 
+      {ternaryheader ? <h3>Ternary True!</h3> : <h3>Ternary False!</h3>}              {/* bentuk ternary */}
+        <hr />
+
+
+                                        {/* ARRAY DESTRUCTION */}
+      
+      <h1>ARRAY DESTRUCTION</h1>
+      <input type="text" 
+      onChange = {(event) => 
+      {setnama1 (event.target.value)   /* mengambil nilai dari input */
+
+      }}/>
+      <br />
+      <button onClick = {() => {
+        setlistnama([...listnama, nama1]);   /* list nama yang terbaru akan memasukkan nama nama baru dalam bentuk array */
+        setnama ("");                       /* input bakal diset kosong lagi */
+      }}> Add Name </button>
+
+      {listnama.map((value, key) => {
+        return <h1 key={key}> {value} </h1>      /*sytanx ini bakal print dalam bentuk array*/
+      })}                   {/*key= 0 value="dara" dst*/}
+
+
+
+
+                                        {/* Use Effect */}
+      
+      
+      <h2> {count} </h2>
+      <button onClick = {() => {setcount(count-1)}}> Decrease </button>
+      <button onClick = {() => {setcount(count+1)}}> Increase </button>
+
+      <hr />
+      <br />
+
+
+
+
+                                            {/* USE REF*/}
+
+      <input type="text" placeholder="halo" ref={input}/>
+
+      <br /> 
+      
+      <button onClick = {changeplaceholder} > Chenge Placeholder! </button>
+
+
+
 
 
 
